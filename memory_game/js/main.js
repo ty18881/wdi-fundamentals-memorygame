@@ -40,20 +40,47 @@ if (cardsInPlay[0] === cardsInPlay[1])
 	}	
 }
 
-function flipCard(cardId){
+function flipCard(){
 
-console.log("User flipped "+ cards[cardId].rank);
+var cardId = this.getAttribute("data-id");
+// display the face of the card selected
 console.log("Card Image "+ cards[cardId].cardImage);
-console.log("Card Rank "+ cards[cardId].rank);
+
+this.setAttribute('src', cards[cardId].cardImage);
+
+
 
 cardsInPlay.push(cards[cardId].rank);
 
+if (cardsInPlay.length === 2){
 checkForMatch();
 }
 
-flipCard(0);
+/*console.log("User flipped "+ cards[cardId].rank);
+
+console.log("Card Rank "+ cards[cardId].rank);
+*/
+
+
+
+}
+
+function createBoard(){
+	for (var i=0; i < cards.length; i++) {
+
+		var cardElement = document.createElement('img');
+		cardElement.setAttribute('src', 'images/back.png');
+		cardElement.setAttribute('data-id', i);
+		cardElement.addEventListener('click', flipCard);
+		document.getElementById('game-board').appendChild(cardElement);
+	}
+}
+/*flipCard(0);
 
 flipCard(2);
+*/
+
+createBoard();
 
 /*
 if (cardsInPlay.length === 2){
